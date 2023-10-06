@@ -1,14 +1,12 @@
 import { Alert } from 'react-native';
 import { CalendarProvider, WeekCalendar as WeekCalendarView } from 'react-native-calendars';
 
-const WeekCalendar = () => {
-  const onPressBtn = () => {
-    Alert.alert("WTF")
-  }
+const WeekCalendar = ({ onDayPress }: { onDayPress: any }) => {
+
   return (
     <CalendarProvider date='2023-10-05' style={{ minHeight: 1, minWidth: 1 }}>
-     <WeekCalendarView onDayPress={onPressBtn}/>
-  </CalendarProvider>
+      <WeekCalendarView onDayPress={onDayPress} />
+    </CalendarProvider>
   )
 }
 

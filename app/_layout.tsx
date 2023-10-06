@@ -10,7 +10,7 @@ function _layout() {
       tabBarStyle: {
         height: 110,
         borderColor: "white",
-        borderTopColor: "blue",
+        borderTopColor: "black",
         backgroundColor: "white",
       },
       tabBarLabelStyle: {
