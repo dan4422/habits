@@ -1,56 +1,54 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { SplashScreen, Stack } from 'expo-router';
-import { useEffect } from 'react';
-import { useColorScheme } from 'react-native';
+import { Tabs } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { Octicons } from '@expo/vector-icons';
 
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from 'expo-router';
-
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
-};
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
-export default function RootLayout() {
-  const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-    ...FontAwesome.font,
-  });
-
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
-  useEffect(() => {
-    if (error) throw error;
-  }, [error]);
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
-  return <RootLayoutNav />;
-}
-
-function RootLayoutNav() {
-  const colorScheme = useColorScheme();
+function _layout() {
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </ThemeProvider>
-  );
+    <Tabs screenOptions={{
+      tabBarActiveTintColor: "#f3134",
+      tabBarStyle: {
+        height: 110,
+        borderColor: "white",
+        borderTopColor: "blue",
+        backgroundColor: "white",
+      },
+      tabBarLabelStyle: {
+        fontSize: 12,
+        fontWeight: "bold",
+        marginBottom: 10,
+        color: "black"
+      },
+      tabBarIconStyle: {
+        color: "yellow",
+      }
+    }}>
+      <Tabs.Screen name="index" options={{ href: null }} />
+      <Tabs.Screen name="home/Home" options={{
+        title: "Home", tabBarIcon: ({ focused, color, size }) => (
+          <Ionicons name="home" size={32} color="black" />
+        )
+      }} />
+      <Tabs.Screen name="calendar/CalendarView" options={{
+        title: "Calendar",
+        tabBarIcon: ({ focused, color, size }) => (
+          <Ionicons name="calendar" size={32} color="lightgreen" />
+        )
+      }} />
+        <Tabs.Screen name="stats/Stats" options={{
+          title: "Stats",
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name="stats-chart" size={32} color="red" />
+          )
+        }} />
+      <Tabs.Screen name="profile/Profile" options={{
+        title: "Profile",
+        tabBarIcon: ({ focused, color, size }) => (
+          <Ionicons name="ios-person" size={32} color="grey" />
+        )
+      }} />
+    </Tabs>
+  )
 }
+
+export default _layout;
