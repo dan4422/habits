@@ -23,7 +23,7 @@ function _layout() {
         color: "yellow",
       }
     }}>
-      <Tabs.Screen name="index" options={{ href: null }} />
+      <Tabs.Screen name="index" options={{ href: null, title: "Welcome!" }} />
       <Tabs.Screen name="home/Home" options={{
         title: "Home", tabBarIcon: ({ focused, color, size }) => (
           <Ionicons name="home" size={32} color="black" />
